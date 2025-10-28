@@ -40,8 +40,8 @@ peminjam{
 
 
 kategori ||--o{ buku : "memiliki"
-rak_buku}o--o{ buku : "menyimpan"
+rak_buku ||--o{ buku : "menyimpan"
 petugas ||--o{ buku : "menginput"
-peminjam }o--o{ petugas : "meminjam"
-
+petugas ||--o{ peminjam : "melayani"
+peminjam }o--o{ buku : "meminjam"
 ```
