@@ -2,7 +2,6 @@
 erDiagram
 
 buku{
-    int id_buku
     string judul
     string pengarang
     string penerbit
@@ -10,27 +9,22 @@ buku{
 }
     
 kategori{
-    int id_kategori
     string nama_kategori
     string deskripsi
 }
 
 rak_buku{
-    int id_rak
     string kode_rak
     string lokasi
 }
 
 petugas{
-    int id_petugas
     string nama_petugas
 }
 
 peminjam{
-    int id_peminjam
     string nama_peminjam
     string alamat
-
 }
 
 
