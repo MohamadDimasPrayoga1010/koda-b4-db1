@@ -20,18 +20,22 @@ book {
 category {
     int id
     string category_name
-    string description
+    timestamp created_at
+    timestamp updated_at
 }
 
 bookshelf {
     int id
     string shelf_code
     string book_location
+    timestamp created_at
+    timestamp updated_at
 }
 
 officer {
     int id
     string officer_name
+    timestamp created_at
 }
 
 borrower {
@@ -39,6 +43,8 @@ borrower {
     string borrowers_name
     string borrower_address
     int officer_id
+    timestamp created_at
+    timestamp updated_at
 }
 
 borrowing {
@@ -47,6 +53,8 @@ borrowing {
     int book_id
     date borrow_date
     date return_date
+    timestamp created_at
+    timestamp updated_at
 }
 
 category ||--o{ book : "own"
