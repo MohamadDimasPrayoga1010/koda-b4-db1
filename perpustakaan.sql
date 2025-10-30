@@ -1,20 +1,22 @@
-
 CREATE TABLE category (
     id SERIAL PRIMARY KEY,
-    category_name VARCHAR(100),
-    description VARCHAR(100)
+    category_name VARCHAR(100) UNIQUE,
 );
-INSERT INTO category (category_name, description) VALUES
-('Fiction', 'Books that contain fictional stories'),
-('Non-Fiction', 'Books based on real events and facts'),
-('Science', 'Books about scientific topics'),
-('History', 'Books about historical events'),
-('Technology', 'Books about technology and IT'),
-('Art', 'Books about painting, sculpture, and design'),
-('Biography', 'Books about people''s lives'),
-('Self-Help', 'Books to improve personal skills'),
-('Children', 'Books for children'),
-('Travel', 'Books about traveling and places');
+
+ALTER TABLE category
+ADD COLUMN created_at TIMESTAMP DEFAULT now(),
+ADD COLUMN updated_at TIMESTAMP DEFAULT now();
+INSERT INTO category (category_name) VALUES
+('Fiction'),
+('Non-Fiction'),
+('Science'),
+('History'),
+('Technology'),
+('Art'),
+('Biography'),
+('Self-Help'),
+('Children'),
+('Travel');
 
 
 CREATE TABLE bookshelf (
@@ -22,6 +24,10 @@ CREATE TABLE bookshelf (
     shelf_code VARCHAR(20),
     book_location VARCHAR(50)
 );
+
+ALTER TABLE bookshelf
+ADD COLUMN created_at TIMESTAMP DEFAULT now(),
+ADD COLUMN updated_at TIMESTAMP DEFAULT now();
 
 INSERT INTO bookshelf (shelf_code, book_location) VALUES
 ('A01', 'First Floor - Section A'),
@@ -40,6 +46,11 @@ CREATE TABLE officer (
     id SERIAL PRIMARY KEY,
     officer_name VARCHAR(50)
 );
+
+ALTER TABLE officer
+ADD COLUMN created_at TIMESTAMP DEFAULT now();
+
+
 
 INSERT INTO officer (officer_name) VALUES
 ('Fiki'),
@@ -60,7 +71,12 @@ CREATE TABLE borrower (
     borrowers_address VARCHAR(100),
     officer_id INT,  
     FOREIGN KEY (officer_id) REFERENCES officer(id)
+
 );
+ALTER TABLE borrower
+ADD COLUMN created_at TIMESTAMP DEFAULT now(),
+ADD COLUMN updated_at TIMESTAMP DEFAULT now();
+
 
 INSERT INTO borrower (borrowers_name, borrowers_address, officer_id) VALUES
 ('Fiki', 'Depok street', 1),
@@ -113,6 +129,11 @@ CREATE TABLE borrowing (
     FOREIGN KEY (book_id) REFERENCES book(id)
 );
 
+ALTER TABLE borrowing
+ADD COLUMN created_at TIMESTAMP DEFAULT now(),
+ADD COLUMN updated_at TIMESTAMP DEFAULT now();
+
+
 
 INSERT INTO borrowing (borrower_id, book_id, borrow_date, return_date) VALUES
 (1, 3, '2024-01-15', '2024-01-25'),
@@ -125,3 +146,7 @@ INSERT INTO borrowing (borrower_id, book_id, borrow_date, return_date) VALUES
 (8, 9, '2024-08-02', '2024-08-12'),
 (9, 10, '2024-09-03', '2024-09-13'),
 (10, 6, '2024-10-04', '2024-10-14');
+
+
+SELECT book.id, book.title, category.category_name FROM book
+JOIN category on book.category_id = category.id;
